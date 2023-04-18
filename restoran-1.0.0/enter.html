@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+   <link rel="stylesheet" href="style2.css">
+  <title>Вход</title>
+ </head>
+ <body>
+<table>
+<?php
+echo '<form action="" method="post" class="f2">';
+echo 'Вход';
+  echo '<tr>';
+    echo '<td>';
+     echo 'Логин:<input type="text" name="login" >';
+    echo '</td>';
+    echo '<td>';
+     echo 'почта:<input type="text" name="mail" >';
+    echo '</td>';
+    echo '<td>';
+     echo 'пароль:<input type="text" name="password" >';
+    echo '</td>';
+
+    echo '<td>';
+      echo '<input type="submit" name="submit" value="Вход>';
+    echo '</td>';
+  echo '</tr>';
+echo '</form>';
+   
+?>
+
+</table>
+<a class="link" href="../index.html">Вернутся на главную</a>
+</body>
+</html>
+<?php
+include 'db.php';
+$login=$_POST['login'];
+$mail=$_POST['mail'];
+$password=$_POST['password'];
+
+    @mysqli_query ($db, 'set character_set_results = "utf8"');
+    $res = mysqli_query($db, "SELECT * FROM `users` where `mail`='$mail' AND `password` ='$password');
+    $result = mysqli_query($link, $res);
+    $user = mysqli_fetch_assoc($result);
+    if (!empty($user))
+    {
+      include 'cabinet.php';
+    }
+echo 'пользователя нет или иди нахер от сюда'
+?>
